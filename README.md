@@ -1,1 +1,1 @@
-# Social-Media-API
+# Friend Me/API
