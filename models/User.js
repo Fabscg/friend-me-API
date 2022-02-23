@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 // const dateFormat = require('../utils/dateFormat')
 
 
-const userSchema = new Schema(
+const UserSchema = new Schema(
     {
       username: {
         type: String,
@@ -26,7 +26,7 @@ const userSchema = new Schema(
       },
     });
 
-userSchema.virtual('friendCount').get(function() {
+UserSchema.virtual('friendCount').get(function() {
     return this.friends.length;
   });
 
