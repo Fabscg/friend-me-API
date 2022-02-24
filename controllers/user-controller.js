@@ -3,10 +3,6 @@ const { User } = require('../models')
 const userController = {
     getAllUser(req, res) {
         User.find({})
-        // .populate.find({
-        //     path:'thoughts',
-        //     select: '__v'
-        // })
         .select('__v')
         .sort({ _id: -1})
         .then(dbUserData => res.json(dbUserData))
@@ -15,6 +11,7 @@ const userController = {
             res.sendStatus(400)
         })
     },
+    
 
 // get one user
     getUserById({ params }, res) {

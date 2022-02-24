@@ -1,5 +1,5 @@
-const { Schema, model } = require('mongoose');
-// const dateFormat = require('../utils/dateFormat')
+const { Schema, model, Types } = require('mongoose');
+const dateFormat = require('../utils/dateFormat');
 
 
 const UserSchema = new Schema(
@@ -12,9 +12,11 @@ const UserSchema = new Schema(
       },
       email: {
         type: String,
-        required:true,
-        unique:true,
-        match: /^([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)$/,
+        trim: true,
+        required: true,
+        maxlength: 40,
+        unique: true,
+        match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
       },
       thoughts: {
        type:Schema.Types.ObjectId,
@@ -29,6 +31,7 @@ const UserSchema = new Schema(
 UserSchema.virtual('friendCount').get(function() {
     return this.friends.length;
   });
+ 
 
 
 const User = model('User', UserSchema);
