@@ -45,4 +45,12 @@ const userController = {
     }
 }
 
+//createFriend function goes here
+
+
+
+// deleteFriend fucntion goes heres
+
+
+
 module.exports = userController;
