@@ -9,12 +9,12 @@ const ReactionSchema = new Schema(
     },
     reactionBody: {
       type: String,
-      required:true,
-      maxlength:280,
+      required: true,
+      maxlength: 280,
     },
     username: {
       type: String,
-      required:true
+      required: true
     },
     createdAt: {
       type: Date,
@@ -34,22 +34,35 @@ const ThoughtSchema = new Schema(
   {
     thoughtText: {
       type: String,
-      require:true,
-      maxlength:280
+      require: true,
+      maxlength: 280
     },
-    createdAt:{
-      type:Date,
+    createdAt: {
+      type: Date,
       default: Date.now,
       get: createdAtVal => dateFormat(createdAtVal),
-      getter:true,
+      getter: true,
     },
     username: {
-      type:String,
-      required:true,
+      type: String,
+      required: true,
     },
-    reactions:[ReactionSchema]
+
+    reactions: [ReactionSchema]
+  },
+  {
+    toJSON: {
+      virtuals: true,
+      getters: true
+    },
+    id: false
   }
-  )
-  const Thought = model('Thought', ThoughtSchema)
-  
-  module.exports = Thought;
+)
+
+ThoughtSchema.virtual("reationCount").get(function () {
+  return this.reactions.length;
+})
+
+const Thought = model('Thought', ThoughtSchema)
+
+module.exports = Thought;
