@@ -8,7 +8,8 @@ const UserSchema = new Schema(
       type: String,
       unique: true,
       required: true,
-      trim: true
+      trim: true,
+      unique: true
     },
     email: {
       type: String,
@@ -28,15 +29,18 @@ const UserSchema = new Schema(
         ref: 'User'
       }
     ],
-  });
+  },
+  {
+    toJSON: {
+      virtuals: true,
+    },
+    id: false,
+  }
+);
 
-
-UserSchema.virtual('thoughtCount').get(function () {
-  return this.thoughts.reduce(
-    (total, thought) => total + thought.reactions.length + 1,
-    0
-  );
-});
+UserSchema.virtual('friendCount').get(function () {
+  return this.friends.length
+})
 
 
 
