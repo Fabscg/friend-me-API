@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Thought } = require('../../models')
+
 
 const {
     getAllThought,
@@ -14,7 +14,8 @@ router
     .route('/')
     .get(getAllThought)
 
-router.route('/:thoughId')
+
+router.route('/:thoughtId')
     .get(getThoughtId)
     .delete(deleteThought)
 
